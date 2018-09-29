@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+ 
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/dimsdb?useUnicode=true&amp;characterEncoding=UTF-8" driverClass="com.mysql.jdbc.Driver" password="85124206" userId="root" />
+    <javaModelGenerator targetPackage="abc.tzous4j.dims.model" targetProject="dims-persist" />
+    <sqlMapGenerator targetPackage="abc.tzous4j.dims.dao" targetProject="dims-persist" />
+    <javaClientGenerator targetPackage="abc.tzous4j.dims.dao" targetProject="dims-persist" type="XMLMAPPER" />
+    <table schema="tbuser" tableName="tbuser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="uid" property="uid" />
+      <columnOverride column="uname" property="uname" />
+      <columnOverride column="upasswd" property="upasswd" />
+      <columnOverride column="udesc" property="udesc" />
+      <columnOverride column="ustat" property="ustat" />
+      <columnOverride column="uregister" property="uregister" />
+      <columnOverride column="uinvalid" property="uinvalid" />
+    </table>
+    <table schema="tbsys" tableName="tbsys" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="sysid" property="sysid" />
+      <columnOverride column="sysname" property="sysname" />
+      <columnOverride column="sysversion" property="sysversion" />
+    </table>
+    <table schema="tbgrp" tableName="tbgrp" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="gid" property="gid" />
+      <columnOverride column="gsite" property="gsite" />
+      <columnOverride column="gname" property="gname" />
+      <columnOverride column="ghid" property="ghid" />
+      <columnOverride column="gstat" property="gstat" />
+    </table>
+    <table schema="tbusergrp" tableName="tbusergrp" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="ugid" property="ugid" />
+      <columnOverride column="uid" property="uid" />
+      <columnOverride column="gid" property="gid" />
+      <columnOverride column="uglevel" property="uglevel" />
+    </table>
+    <table schema="tbdevtype" tableName="tbdevtype" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="typeid" property="typeid" />
+      <columnOverride column="typename" property="typename" />
+      <columnOverride column="superid" property="superid" />
+    </table>
+    <table schema="tbdevmodel" tableName="tbdevmodel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="modelid" property="modelid" />
+      <columnOverride column="devbrand" property="devbrand" />
+      <columnOverride column="devmodel" property="devmodel" />
+      <columnOverride column="typeid" property="typeid" />
+    </table>
+    <table schema="tbdevlog" tableName="tbdevlog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="logid" property="logid" />
+      <columnOverride column="oper" property="oper" />
+      <columnOverride column="op" property="op" />
+      <columnOverride column="opdate" property="opdate" />
+      <columnOverride column="optime" property="optime" />
+      <columnOverride column="devid" property="devid" />
+      <columnOverride column="okeys" property="okeys" />
+      <columnOverride column="nkeys" property="nkeys" />
+    </table>
+    <table schema="tbdevinfo" tableName="tbdevinfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="devid" property="devid" />
+      <columnOverride column="famsid" property="famsid" />
+      <columnOverride column="eamid" property="eamid" />
+      <columnOverride column="devsn" property="devsn" />
+      <columnOverride column="devname" property="devname" />
+      <columnOverride column="devbrand" property="devbrand" />
+      <columnOverride column="devmodel" property="devmodel" />
+      <columnOverride column="devdate" property="devdate" />
+      <columnOverride column="siteid" property="siteid" />
+      <columnOverride column="keeper" property="keeper" />
+      <columnOverride column="devlocation" property="devlocation" />
+      <columnOverride column="devlevel" property="devlevel" />
+      <columnOverride column="devstat" property="devstat" />
+      <columnOverride column="remarks" property="remarks" />
+      <columnOverride column="isasset" property="isasset" />
+      <columnOverride column="opdate" property="opdate" />
+    </table>
+    <table schema="tbdevip" tableName="tbdevip" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <columnOverride column="dcid" property="dcid" />
+      <columnOverride column="devid" property="devid" />
+      <columnOverride column="cip" property="cip" />
+      <columnOverride column="dcip" property="dcip" />
+      <columnOverride column="dcmask" property="dcmask" />
+      <columnOverride column="dcgateway" property="dcgateway" />
+    </table>
+  </context>
+</generatorConfiguration>
