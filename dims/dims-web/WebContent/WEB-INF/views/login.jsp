@@ -6,99 +6,94 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
  %>
  <base href="<%=basePath%>">
- 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<!DOCTYPE html>
 <html>
-<head>  
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>支行设备管理台账</title>
-    <link rel="stylesheet" type="text/css" href="public/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="public/easyui/themes/icon.css">
-    <script type="text/javascript" src="public/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="public/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
+<head>
+<meta charset="utf-8"/>
+<title>login</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="public/css/style.css" />
+<style>
+body{height:100%;background:#16a085;overflow:hidden;}
+canvas{z-index:-1;position:absolute;}
+</style>
+<script src="public/js/jquery.js"></script>
+<script src="public/js/verificationNumbers.js"></script>
+<script src="public/js/Particleground.js"></script>
+<script type="text/javascript" src="public/js/common.js"></script>
+<script>
+$(document).ready(function() {
+  //粒子背景特效
+  $('body').particleground({
+    dotColor: '#5cbdaa',
+    lineColor: '#5cbdaa'
+  });
+  //验证码
+  createCode();
+  //提交
+  $(".submit_btn").click(function(){
+      var LOGINNAME = $("#LOGINNAME").val();
+      var PASSWORD = $("#PASSWORD").val();
+      if(JUDGE.isNull(LOGINNAME) || JUDGE.isNull(PASSWORD)){
+          alert("用户名、密码都不能为空!");
+          return;
+      }
+      if(!validate()) {
+    	  alert("验证码校验错误!");
+    	  return;
+      }
+      var condition = {"LOGINNAME":LOGINNAME,"PASSWORD":PASSWORD};
+      condition = JSON.stringify(condition);
+      condition = escape(encodeURIComponent(condition));
+      var url='USERLogin.do?condition='+condition;
 
-</head>
-<body style="height:100%;width:100%;overflow:hidden;border:none;visibility:visible;">
-<div id="mainwindow" class="easyui-window"
-     style="width:500px;height:300px;background:#fafafa;overflow:hidden"
-     title="登录" border="false" resizable="false" draggable="false"
-     minimizable="false" maximizable="false">
-    <div class="header" style="height:35px;">
-        <div class="toptitle" style="margin-top: 25px; font-size:20px; margin-left:60px;">
-           设备台账系统</div>
-    </div>
-    <div style="padding:60px 0;">
-        <div  id="loginForm">
-            <div style="padding-left:150px">
-                <table cellpadding="0" cellspacing="3">
-                    <tr>
-                        <th>登录帐号：</th>
-                        <td><input id="LOGINNAME"   style="width:114px;"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>登录密码：</th>
-                        <td><input id="PASSWORD" type="password"   style="width:114px;"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <a id="btnLogin"  class="easyui-linkbutton"  >登 录</a>
-                            <a class="easyui-linkbutton"  onclick="clearAll()">重 置</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    function clearAll(){
-        document.getElementById('LOGINNAME').value="";
-        document.getElementById('PASSWORD').value="";
-    }
-    $("#PASSWORD").keydown(function(event){
-        if(event.keyCode==13)
-            $("#btnLogin").click();
-    });
+      $.ajax( {
+          type : "post",
+          url : url,
+          contentType : "text/html",
+          error : function(event,request, settings) {
+              alert("请求失败!");
+          },
+          success : function(data) {
+              var jsonresult = eval( data );
+              if(jsonresult.retCode == 0){
+                  window.location.href="index.do";
+              }
+              else{
+                  alert("用户名或密码错误!");
+              }
+          }
+      });
 
-    $("#btnLogin").click(function(){
-        var LOGINNAME = $("#LOGINNAME").val();
-        var PASSWORD = $("#PASSWORD").val();
-        if(JUDGE.isNull(LOGINNAME) || JUDGE.isNull(PASSWORD)){
-            $.messager.alert("提示消息", "用户名、密码都不能为空!", "info");
-            return;
-        }
-
-        var condition = {"LOGINNAME":LOGINNAME,"PASSWORD":PASSWORD};
-        condition = JSON.stringify(condition);
-        condition = escape(encodeURIComponent(condition));
-        var url='USERLogin.do?condition='+condition;
-
-        $.ajax( {
-            type : "post",
-            url : url,
-            contentType : "text/html",
-            error : function(event,request, settings) {
-                $.messager.alert("提示消息", "请求失败!", "info");
-            },
-            success : function(data) {
-                var jsonresult = eval( data );
-                if(jsonresult.retCode == 0){
-                    window.location.href="index.do";
-                }
-                else{
-                    $.messager.alert("提示消息", "用户名或密码错误!", "info");
-                }
-            }
-        });
-    });
+	  });
+});
 </script>
+</head>
+<body>
+<dl class="admin_login">
+ <dt>
+  <strong>设备管理台账</strong>
+  <em>Management System</em>
+ </dt>
+ <dd class="user_icon">
+  <input id="LOGINNAME" name="LOGINNAME" type="text" placeholder="账号" class="login_txtbx"/>
+ </dd>
+ <dd class="pwd_icon">
+  <input id="PASSWORD" name="PASSWORD" type="password" placeholder="密码" class="login_txtbx"/>
+ </dd>
+ <dd class="val_icon">
+  <div class="checkcode">
+    <input type="text" id="J_codetext" name="J_codetext" placeholder="验证码" maxlength="4" class="login_txtbx">
+    <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+  </div>
+ </dd>
+ <dd>
+  <input type="button" value="立即登录" class="submit_btn"/>
+ </dd>
+ <dd>
+  <p>© 2015-2016 DeathGhost </p>
+  <p>2018</p>
+ </dd>
+</dl>
 </body>
 </html>

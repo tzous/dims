@@ -3,7 +3,7 @@
 <generatorConfiguration>
  
   <context id="context1">
-    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/dimsdb?useUnicode=true&amp;characterEncoding=UTF-8" driverClass="com.mysql.jdbc.Driver" password="85124206" userId="root" />
+    <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/dimsdb?useUnicode=true&amp;characterEncoding=UTF-8" driverClass="com.mysql.jdbc.Driver" password="12345678" userId="root" />
     <javaModelGenerator targetPackage="abc.tzous4j.dims.model" targetProject="dims-persist" />
     <sqlMapGenerator targetPackage="abc.tzous4j.dims.dao" targetProject="dims-persist" />
     <javaClientGenerator targetPackage="abc.tzous4j.dims.dao" targetProject="dims-persist" type="XMLMAPPER" />
